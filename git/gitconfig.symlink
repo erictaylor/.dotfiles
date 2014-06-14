@@ -32,8 +32,10 @@
   ours = "!f() { git co --ours $@ && git add $@; }; f"theirs = "!f() { git co --theirs $@ && git add $@; }; f"
   cp = cherry-pick
   st = status -s
-  cl = cloneci = commit
-  co = checkoutbr = branch
+  cl = clone
+  co = checkout
+  # cl = cloneci = commit
+  # co = checkoutbr = branch
   # diff = diff --word-diff
   # dc = diff --cached
   r = resetr1 = reset HEAD^r2 = reset HEAD^^rh = reset --hardrh1 = reset HEAD^ --hardrh2 = reset HEAD^^ --hard
