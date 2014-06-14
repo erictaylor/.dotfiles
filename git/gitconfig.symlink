@@ -1,92 +1,51 @@
 [user]
-  name = Eric Taylor
-  email = eric@daxos.com
-[color]
-  ui = auto
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-[color "status"]
-  added = yellow
-  changed = blue
-  untracked = cyan
-[alias]
-  br = branch
-  # show all branches, even across remotes
-  branches = branch -a --color -v
-  # remove all local branches included in the current branch
-  cleanup = !sh -c 'git branch --merged | grep -E "^[^*]" --exclude "^\\s*master" | xargs -n1 git branch -d'
-  co = checkout
-  ctags = !.git/hooks/ctags
-  # Show the diff between the latest commit and the current state
-  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
-  # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-  # Diff
-  df = diff
-  # Get short SHA-1 for object
-  hash = rev-parse --short HEAD
-  lc = log ORIG_HEAD.. --stat --no-merges
-  # just for fun
-  l33t = !"git shortlog | l33t"
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  ls = ls-files
-  # depends on hub
-  mypulls = browse -- pulls/pengwynn
-  # Find FIXME, TODO, etc, optimized by @x3ro https://gist.github.com/3908985
-  n = !"f() { git ls-files $1 | xargs notes | awk -F: '{ print $1,$2; print $3,$4; print $5}' | grcat conf.notes | less -r;  }; f"
-  pullm = !"git pull origin master"
-  pushm = !"git push origin master"
-  rb = rebase
-  rbc = rebase --continue
-  # Interactive rebase with the selected number of latest commits
-  reb = "!r() { git rebase -i HEAD~$1; }; r"tags = tag -l
-  # track a remote branch
-  track = checkout -t
-  st = status
-  # update all submodules
-  subs = submodule foreach git pull origin master
-  # clean up fully merged branches
-  sweep = !git-sweep
-  # remove a file from the index
-  unstage = reset HEAD --
-	up = "!git remote update -p; git merge --ff-only @{u}"
-  wdiff = diff --color-words
-
+	name = Eric Taylor
+	email = eric@daxos.com
+[mergetool]
+	keepBackup = true
 [core]
-  excludesfile = /opt/boxen/config/git/gitignore
-  excludesfile = /opt/boxen/config/git/gitignore
-
-[init]
-  templatedir = ~/.git_template
-
-[push]
-  default = upstream
-
-[hub]
-  protocol = https
-
-[branch]
-
-[github]
-  user = psiablo
-
-[difftool]
-  prompt = false
-
+	excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
+[heroku]
+	account = personal
+[alias]
+# [Must Have Git Aliases: Advanced Examples - be present now]( http://goo.gl/W8X4k )
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  le = log --oneline --decorate
+  filelog = log -ufl = log -u
+  dl = "!git ll -1"
+  dlc = diff --cached HEAD^
+  dr  = "!f() { git diff "$1"^.."$1"; }; f"lc  = "!f() { git ll "$1"^.."$1"; }; f"diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+  f = "!git ls-files | grep -i"
+  la = "!git config -l | grep alias | cut -c 7-"
+  done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
+  assume = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+  assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+  lasttag = describe --tags --abbrev=0lt = describe --tags --abbrev=0
+  ours = "!f() { git co --ours $@ && git add $@; }; f"theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+  cp = cherry-pick
+  st = status -s
+  cl = clone
+  co = checkout
+  # cl = cloneci = commit
+  # co = checkoutbr = branch
+  # diff = diff --word-diff
+  # dc = diff --cached
+  r = resetr1 = reset HEAD^r2 = reset HEAD^^rh = reset --hardrh1 = reset HEAD^ --hardrh2 = reset HEAD^^ --hard
+	d = difftool
+	vimdiff = difftool -y -t vimdiff -R
 [diff]
-  tool = vimdiff
-
-# vim: ft=gitconfig
+	tool = vimdiff
+[difftool]
+	prompt = false
+[push]
+	default = matching
 [credential]
-  helper = /opt/boxen/bin/boxen-git-credential
-
-[web]
-  browser = open
+	helper = cache
