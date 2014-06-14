@@ -1,221 +1,157 @@
-" Vim
-" ===
+set nocompatible
+syntax enable
+filetype plugin indent on
 
-" Source ~/.vimrc.before if it exists
-if filereadable(expand('~/.vimrc.before'))
-  source ~/.vimrc.before
-endif
-
-
-set nocompatible               " be iMproved
-filetype off                   " required!
-
+" Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 Bundle 'gmarik/vundle'
+Plugin 'tpope/vim-fugitive'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'editorconfig/editorconfig-vim'
+Bundle "mattn/emmet-vim"
 
-Bundle 'L9'
-Bundle 'chriskempson/base16-vim'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'gh:vim-ruby/vim-ruby'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'mattn/webapi-vim'
-Bundle 'tpope/vim-rails'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'godlygeek/tabular'
-Bundle 'scrooloose/nerdtree'
-Bundle 'mattn/gist-vim'
-Bundle 'epmatsw/ag.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tejr/vim-tmux'
-Bundle 'ervandew/supertab'
-Bundle 'tpope/vim-rbenv'
-Bundle 'gem.vim'
-Bundle 'zerowidth/vim-copy-as-rtf'
-Bundle 'kien/ctrlp.vim'
-Bundle 'justinmk/vim-gtfo'
-Bundle 'jayflo/vim-skip'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'gcmt/wildfire.vim'
-
-" Per-directory .vimrc files
-set exrc
-set secure
-
-" Syntax
-" ======
-
-syntax on
-syntax enable
-set t_Co=256
-
-" General Config
-" ==============
-
-let mapleader='\'
-set gfn=Menlo:h14
 set encoding=utf-8
-set number                      " Line numbers are good
-set backspace=indent,eol,start  " Allow backspace in insert mode
-set history=1000                " Store lots of :cmdline history
-set showcmd                     " Show incomplete cmds down the bottom
-set showmode                    " Show current mode down the bottom
-set gcr=a:blinkon0              " Disable cursor blink
-set autoread                    " Reload files changed outside vim
-set laststatus=2                " Always show status line
-set clipboard=unnamed           " Use system clipboard
-set hidden                      " Buffers can exist in the background
-set splitright                  " Opens vertical split right of current window
-set splitbelow                  " Opens horizontal split below current window
-"set shortmess=filnxtToOI       " see :help shortmess
-                                " http://items.sjbach.com/319/configuring-vim-right
+set showcmd
+set showmode
+set showmatch
+set backspace=indent,eol,start
+set number
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set nostartofline
+set textwidth=80
 
-
-" Mouse
-" ======
-
-" Send more characters for redraws
-set ttyfast
-
-" Enable mouse use in all modes
-set mouse=a
-
-" Set this to the name of your terminal that supports mouse codes.
-" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-set ttymouse=xterm2
-
-
-" Search Settings
-" ===============
-
-set incsearch        " Find the next match as we type the search
-set hlsearch         " Hilight searches by default
-set viminfo='100,f1  " Save up to 100 marks, enable capital marks
-
-" Turn Off Swap Files
-" ===================
-
-set noswapfile
-set nobackup
-set nowritebackup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-" Persistent Undo
-" ===============
-
-" Keep undo history across sessions, by storing in file
-" Only works in MacVim (gui) mode
-if has('gui_running')
-  set undodir=~/.vim/backups
-  set undofile
-  " Hide the toolbar
-  set guioptions-=T
-endif
-
-" Indentation and Display
-" =======================
-
+set nowrap
+set textwidth=0 wrapmargin=0
 set autoindent
 set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
-filetype plugin on
-filetype indent on
+let mapleader = ','
+let g:mapleader = ','
 
-set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
-set nowrap                            " Don't wrap lines
-set linebreak                         " Wrap lines at convenient points
-
-" Folds
-" =====
-
-set foldmethod=indent   " Fold based on indent
-set foldnestmax=3       " Deepest fold is 3 levels
-set nofoldenable        " Don't fold by default
-
-" Completion
-" ==========
-
-"set wildmode=list:longest
-set wildmode=longest,list,full
-set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-
-" Scrolling
-" =========
-
-" Start scrolling when we're getting close to margins
-set scrolloff=10
-set sidescrolloff=15
-set sidescroll=1
-
-" Status Line
-" ===========
-
-set statusline=                                 " Override default
-set statusline+=%{fugitive#statusline()[4:-2]}  " Show fugitive git info
-set statusline+=\ %f\ %m\ %r                    " Show filename/path
-set statusline+=%=                              " Set right-side status info after this line
-set statusline+=%l/%L:%v                        " Set <line number>/<total lines>:<column>
-set statusline+=\                               " Set ending space
+"autocmd vimenter * if !argc() | NERDTree | endi
+"autocmd vimenter * NERDTree
 
 " NERDTree
-" ========
-function! ShowFileInNERDTree()
-  if exists("t:NERDTreeBufName")
-    NERDTreeFind
-  else
-    NERDTree
-    wincmd l
-    NERDTreeFind
-  endif
-endfunction
-map <leader>f :call ShowFileInNERDTree()<cr>
+let g:NERDChristmasTree=1
+let g:NERDTreeAutoCenter=1
+let g:NERDTreeHighlightCursorline=1
+let g:NERDTreeHijackNetrw=1
+let g:NERDTreeStatusline=1
+let g:NERDTreeWinSize=20
 
-" Plugin overrides
-source ~/.vim/autocmd.vim
-source ~/.vim/format.vim
-source ~/.vim/rails.vim
-source ~/.vim/ruby.vim
-source ~/.vim/common.vim
-source ~/.vim/tmux.vim
-source ~/.vim/colors.vim
-source ~/.vim/ctrlp.vim
+nmap <C-k> :NERDTreeTabsToggle<CR>
+imap <C-k> :NERDTreeTabsToggle<CR>
 
-colorscheme base16-solarized
-set background=dark
+" FuzzyFinder
+nmap <leader>fd :FufDir<CR>
+imap <leader>fd :FufDir<CR>
+map <leader>ff :FufFile */<CR>
+nmap <leader>ff :FufFile */<CR>
+map <leader>fa :FufFile **/<CR>
+nmap <leader>fa :FufFile **/<CR>
+nmap <leader>fb :FufBuffer<CR>
+imap <leader>fb <C-O>:FufBuffer<CR>
+nmap <leader>fn :tabnew \| :FufFile */<CR>
+imap <leader>fn :tabnew \| :FufFile */<CR>
 
-" Git Gutter
-" ==========
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_eager = 0
+" indent for command mode
+nmap <S-Tab> <<
+nmap <Tab> >>
+imap <S-Tab> <Esc><<i
+vmap <Tab> >
+vmap <S-Tab> <
 
-hi StatusLine ctermfg=5 ctermbg=10 guifg=#6c71c4 guibg=#073642
+" Tab commands and navigation
+nmap <leader>t :tabnew<CR>
+nmap <C-a> :tabprevious<CR>
+imap <C-a> <ESC>:tabprevious<CR>i
+nmap <C-b> :tabnext<CR>
+imap <C-b> <Esc>:tabnext<CR>i
+noremap <leader>a :tabprevious<CR>
+noremap <leader>d :tabnext<CR>
 
-" Highlight words to avoid in tech writing
-" =======================================
-"
-"   obviously, basically, simply, of course, clearly,
-"   just, everyone knows, However, So, easy
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
 
-"   http://css-tricks.com/words-avoid-educational-writing/
+" Select all of contents (DREPRECADED)
+" noremap <C-a> gggH<C-O>G
+" inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
+" cnoremap <C-a> <C-C>gggH<C-O>G
+" onoremap <C-a> <C-C>gggH<C-O>G
+" snoremap <C-a> <C-C>gggH<C-O>G
+" xnoremap <C-a> <C-C>ggVG
 
-highlight TechWordsToAvoid ctermbg=red ctermfg=white
-function MatchTechWordsToAvoid()
-	match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
-endfunction
-autocmd FileType markdown call MatchTechWordsToAvoid()
-autocmd BufWinEnter *.md call MatchTechWordsToAvoid()
-autocmd InsertEnter *.md call MatchTechWordsToAvoid()
-autocmd InsertLeave *.md call MatchTechWordsToAvoid()
-autocmd BufWinLeave *.md call clearmatches()
+" Extend keys in visual mode
+vnoremap <BS> d
+vnoremap c y
+vnoremap v p
+
+" Bind keys for Windows experience
+nmap <C-q> :q<CR>
+nmap <C-s> :w<CR>
+vmap <C-s> <C-C>:w<CR>
+imap <C-s> <C-O>:w<CR>
+inoremap <C-z> <C-O>u
+nnoremap <C-z> <C-O>u
+
+nnoremap <leader>q :q<CR>
+nnoremap <leader>s :w<CR>
+
+" Utils
+nnoremap <leader>re :source $HOME/.vimrc<CR>
+
+" (Redefine) Window navigation
+nnoremap <leader>, <c-w>w<CR>
+nnoremap <leader>wq <c-w>q<CR>
+nnoremap <leader>wn <c-w>n<CR>
+nnoremap <leader>wv :vsp<CR><c-w><c-r>
+nnoremap <leader>wr <c-w><c-r><CR>
+
+" Cursor
+nnoremap ` ^
+vnoremap ` ^
+nnoremap 1 $
+vnoremap 1 $
+
+" Turn on these
+set nu
+set ar
+
+set pastetoggle=<leader>pp
+
+" Emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-m>'
+let g:user_emmet_mode='a'
+
+" Vim cursorline
+" set cursorline
+" hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10"
