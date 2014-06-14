@@ -1,12 +1,17 @@
 set nocompatible
-syntax enable
-filetype plugin indent on
+filetype off
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'L9'
@@ -14,7 +19,11 @@ Plugin 'FuzzyFinder'
 Plugin 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'editorconfig/editorconfig-vim'
-Bundle "mattn/emmet-vim"
+Bundle 'mattn/emmet-vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 set encoding=utf-8
 set showcmd
