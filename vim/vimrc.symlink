@@ -1,168 +1,78 @@
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
+set rtp+=/usr/local/go/misc/vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-fugitive'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'L9'
 Plugin 'FuzzyFinder'
-Plugin 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'mattn/emmet-vim'
+Plugin 'YankRing.vim'
+Plugin 'git://git.wincent.com/command-t.git'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
 
-set encoding=utf-8
-set showcmd
-set showmode
-set showmatch
-set backspace=indent,eol,start
-set number
-set incsearch
+let g:CommandTMatchWindowAtTop = 1
+let g:EasyMotion_leader_key = ';'
+let g:Powerline_symbols = 'fancy'
+let g:yankring_history_file = '.yankring_history'
+
+" Color
+colorscheme solarized
+
+" Indentation
+filetype plugin indent on
+au BufNewFile,BufReadPost *.go,*.rb,*.erb,*.css,*.scss,*.html,*.js setl shiftwidth=2 expandtab
+
+" Mappings
+let mapleader = ","
+nmap <Leader>b :FufBuffer<CR>
+nmap <Leader>d :FufDir<CR>
+nmap <Leader>f :FufFile<CR>
+nmap <Leader>F :FufCoverageFile<CR>
+nmap <Leader>k :bd<CR>
+nmap <Leader>K :bd!<CR>
+nmap <Leader>n :enew<CR>
+nmap <Leader>q :q<CR>
+nmap <Leader>Q :q!<CR>
+nmap <Leader>t :CommandT<CR>
+nmap <Leader>w :w<CR>
+nmap <Leader>ev :e $MYVIMRC<CR>
+nmap <Leader>sv :so $MYVIMRC<CR>
+nmap <Leader>/ :nohlsearch<CR>
+imap jk <Esc>
+
+" Settings
+set background=dark
+set cursorline
+set guifont=Monaco:h14
+set guioptions-=T
+set hidden
 set hlsearch
 set ignorecase
-set smartcase
-set nostartofline
-set textwidth=80
-
+set incsearch
+set laststatus=2
+set list
+set listchars=extends:>,precedes:<,tab:>-,trail:~
+set nobackup
+set noswapfile
 set nowrap
-set textwidth=0 wrapmargin=0
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set number
+set smartcase
+set wildignore+=bin/**
+set wildignore+=vendor/**
 
-let mapleader = ','
-let g:mapleader = ','
-
-"autocmd vimenter * if !argc() | NERDTree | endi
-"autocmd vimenter * NERDTree
-
-" NERDTree
-let g:NERDChristmasTree=1
-let g:NERDTreeAutoCenter=1
-let g:NERDTreeHighlightCursorline=1
-let g:NERDTreeHijackNetrw=1
-let g:NERDTreeStatusline=1
-let g:NERDTreeWinSize=20
-
-nmap <C-k> :NERDTreeTabsToggle<CR>
-imap <C-k> :NERDTreeTabsToggle<CR>
-
-" FuzzyFinder
-nmap <leader>fd :FufDir<CR>
-imap <leader>fd :FufDir<CR>
-map <leader>ff :FufFile */<CR>
-nmap <leader>ff :FufFile */<CR>
-map <leader>fa :FufFile **/<CR>
-nmap <leader>fa :FufFile **/<CR>
-nmap <leader>fb :FufBuffer<CR>
-imap <leader>fb <C-O>:FufBuffer<CR>
-nmap <leader>fn :tabnew \| :FufFile */<CR>
-imap <leader>fn :tabnew \| :FufFile */<CR>
-
-" indent for command mode
-nmap <S-Tab> <<
-nmap <Tab> >>
-imap <S-Tab> <Esc><<i
-vmap <Tab> >
-vmap <S-Tab> <
-
-" Tab commands and navigation
-nmap <leader>t :tabnew<CR>
-nmap <C-a> :tabprevious<CR>
-imap <C-a> <ESC>:tabprevious<CR>i
-nmap <C-b> :tabnext<CR>
-imap <C-b> <Esc>:tabnext<CR>i
-noremap <leader>a :tabprevious<CR>
-noremap <leader>d :tabnext<CR>
-
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-" Select all of contents (DREPRECADED)
-" noremap <C-a> gggH<C-O>G
-" inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
-" cnoremap <C-a> <C-C>gggH<C-O>G
-" onoremap <C-a> <C-C>gggH<C-O>G
-" snoremap <C-a> <C-C>gggH<C-O>G
-" xnoremap <C-a> <C-C>ggVG
-
-" Extend keys in visual mode
-vnoremap <BS> d
-vnoremap c y
-vnoremap v p
-
-" Bind keys for Windows experience
-nmap <C-q> :q<CR>
-nmap <C-s> :w<CR>
-vmap <C-s> <C-C>:w<CR>
-imap <C-s> <C-O>:w<CR>
-inoremap <C-z> <C-O>u
-nnoremap <C-z> <C-O>u
-
-nnoremap <leader>q :q<CR>
-nnoremap <leader>s :w<CR>
-
-" Utils
-nnoremap <leader>re :source $HOME/.vimrc<CR>
-
-" (Redefine) Window navigation
-nnoremap <leader>, <c-w>w<CR>
-nnoremap <leader>wq <c-w>q<CR>
-nnoremap <leader>wn <c-w>n<CR>
-nnoremap <leader>wv :vsp<CR><c-w><c-r>
-nnoremap <leader>wr <c-w><c-r><CR>
-
-" Cursor
-nnoremap ` ^
-vnoremap ` ^
-nnoremap 1 $
-vnoremap 1 $
-
-" Turn on these
-set nu
-set ar
-
-set pastetoggle=<leader>pp
-
-" Emmet
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_leader_key='<C-m>'
-let g:user_emmet_mode='a'
-
-" Vim cursorline
-" set cursorline
-" hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10"
-
-imap jk <Esc>
+fun! <SID>StripTrailingWhitespace()
+  let l = line(".")
+  let c = col(".")
+  let _s = @/
+  %s/\s\+$//e
+  let @/ = _s
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
