@@ -43,3 +43,5 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
+
+export PATH=$PATH
