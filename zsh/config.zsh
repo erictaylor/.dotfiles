@@ -32,8 +32,9 @@ setopt auto_name_dirs
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt complete_aliases
+unsetopt auto_name_dirs
 
-# Reclaim CTRL-S and CTRL-Q key bindings 
+# Reclaim CTRL-S and CTRL-Q key bindings
 stty -ixon -ixoff
 
 #bindkey '^[[1;5D' backward-word
