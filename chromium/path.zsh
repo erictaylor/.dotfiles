@@ -1,1 +1,1 @@
-export PATH=$PATH:/usr/local/bin/depot_tools
+export PATH=/usr/local/bin/depot_tools:$PATH
