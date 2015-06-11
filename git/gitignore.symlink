@@ -3,7 +3,6 @@
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
 ehthumbs.db
 Thumbs.db
 .svn
@@ -11,3 +10,4 @@ Thumbs.db
 *.swp
 *.rbc
 .tags
+Icon
