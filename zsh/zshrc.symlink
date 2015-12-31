@@ -14,7 +14,7 @@ export PATH=$HOME/.rvm/bin:$PATH
 
 # NVM
 export NVM_DIR="/Users/erictaylor/.nvm"
-[-s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 for file in ${(M)config_files:#*/path.zsh}
 do
