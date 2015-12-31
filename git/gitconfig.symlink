@@ -49,3 +49,5 @@
 	default = matching
 [credential]
 	helper = cache
+[merge]
+	# ff = false

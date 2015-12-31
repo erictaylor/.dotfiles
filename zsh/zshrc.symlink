@@ -12,6 +12,10 @@ config_files=($ZSH/**/*.zsh)
 # load the path files
 export PATH=$HOME/.rvm/bin:$PATH
 
+# NVM
+export NVM_DIR="/Users/erictaylor/.nvm"
+[-s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
 for file in ${(M)config_files:#*/path.zsh}
 do
   source $file
@@ -45,3 +49,5 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
+# added by travis gem
+[ -f /Users/erictaylor/.travis/travis.sh ] && source /Users/erictaylor/.travis/travis.sh
