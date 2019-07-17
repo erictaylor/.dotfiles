@@ -51,7 +51,7 @@ imap jk <Esc>
 " Settings
 set background=dark
 set cursorline
-set guifont=Monaco:h14
+set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h14
 set guioptions-=T
 set hidden
 set hlsearch
