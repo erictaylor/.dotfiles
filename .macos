@@ -401,7 +401,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 16 pixels
-defaults write com.apple.dock tilesize -int 16
+defaults write com.apple.dock tilesize -int 32
 
 # Change minimize/maximize window effect
 # defaults write com.apple.dock mineffect -string "scale"
@@ -868,10 +868,10 @@ install: \n\
   Powerline fonts \n\
   Firefox Developer Edition \n\
 \n\
+change login shell to zsh. system pref -> users -> advanced options \n\
 Restart Terminal.app\n\
 copy git config from your backup/re-login \n\
 copy .npmrc from your backup/re-login \n\
 copy .yarnrc from your backup/re-login \n\
 login to literally everything \n\
-change login shell to zsh. system pref -> users -> advanced options \n\
 "
