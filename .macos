@@ -28,6 +28,10 @@ echo "installing homebrew"
 # install homebrew https://brew.sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+echo "installing oh-my-zsh"
+# https://ohmyz.sh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 echo "brew installing stuff"
 # imagemagick: eventually I will need this for something
 # jq: command line JSON processor
