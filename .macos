@@ -24,11 +24,11 @@ echo "Hello $(whoami)! Let's get set up."
 echo "mkdir -p $(HOME)/code"
 mkdir -p "$(HOME)/code"
 
-echo "installing homebrew"
+echo "Installing homebrew"
 # install homebrew https://brew.sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "installing oh-my-zsh"
+echo "Installing oh-my-zsh"
 # https://ohmyz.sh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -40,11 +40,13 @@ brew install awscli git git-lfs gnupg heroku imagemagick jq openssl sentry-cli t
 # yarn: without node because we'll get it from installing n later
 brew install yarn --without-node
 
-echo "installing node (via n-install)"
+echo "Installing node (via n-install)"
 curl -L https://git.io/n-install | bash
 
+echo "\n\n"
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
+echo "\n\n"
 
 #echo "installing a few global npm packages"
 #npm install --global semantic-release-cli
@@ -53,10 +55,10 @@ echo "npm --version: $(npm --version)"
 echo "Taping alternative cask versions"
 brew tap homebrew/cask-versions
 
-echo "installing apps with brew cask"
+echo "Installing apps with brew cask"
 brew cask install google-chrome firefox firefox-developer-edition brave-browser \
-visual-studio-code 1password hyper insomnia slack notion figma \
-virtualbox framer-x spotify vlc discord docker suspicious-package \
+visual-studio-code 1password hyper insomnia slack notion figma docker framer-x \
+virtualbox spotify vlc discord suspicious-package \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook qlvideo
 
 echo "Generating an RSA token for GitHub"
@@ -66,14 +68,14 @@ echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa
 eval "$(ssh-agent -s)"
 echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
 
-echo "cloning .dotfiles"
+echo "Cloning .dotfiles"
 git clone git@github.com:erictaylor/.dotfiles.git "${HOME}/.dotfiles"
 ln -s "${HOME}/.dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/.dotfiles/.my_bin" "${HOME}/.my_bin"
 ln -s "${HOME}/.dotfiles/.vimrc" "${HOME}/.vimrc"
 
-echo "making system modifications:"
+echo "Making macOS modifications:"
 
 ###############################################################################
 # General UI/UX                                                               #
@@ -863,7 +865,9 @@ for app in "Activity Monitor" \
   "iCal"; do
   killall "${app}" &> /dev/null
 done
+echo "\n"
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+echo "\n"
 
 
 printf "TODO:\n\
