@@ -61,6 +61,11 @@ visual-studio-code 1password hyper insomnia slack notion figma docker framer-x \
 virtualbox spotify vlc discord suspicious-package \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook qlvideo
 
+# Fonts
+echo "Installing fonts"
+brew tap homebrew/cask-fonts
+brew cask install font-hack
+
 echo "Generating an RSA token for GitHub"
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -b 4096 -C "eric@daxos.com"
