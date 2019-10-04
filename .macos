@@ -36,9 +36,13 @@ echo "brew installing stuff"
 # imagemagick: eventually I will need this for something
 # jq: command line JSON processor
 # tree: really handy for listing out directories in text
-brew install awscli git git-lfs gnupg heroku imagemagick jq openssl sentry-cli tree watchmen
+brew install awscli git git-lfs gnupg imagemagick jq openssl sentry-cli tree watchmen
 # yarn: without node because we'll get it from installing n later
 brew install yarn --without-node
+
+echo "brew installing heroku"
+brew tap heroku/brew
+brew install heroku
 
 echo "Installing node (via n-install)"
 curl -L https://git.io/n-install | bash
