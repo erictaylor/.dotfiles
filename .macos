@@ -37,8 +37,8 @@ echo "brew installing stuff"
 # jq: command line JSON processor
 # tree: really handy for listing out directories in text
 brew install awscli git git-lfs gnupg imagemagick jq openssl sentry-cli tree watchmen
-# yarn: without node because we'll get it from installing n later
-brew install yarn --without-node
+# yarn: without node because we'll get it from installing n later - no longer works, doesn't accept without-node argument.
+# brew install yarn --without-node
 
 echo "brew installing heroku"
 brew tap heroku/brew
@@ -51,6 +51,9 @@ echo "\n\n"
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 echo "\n\n"
+
+echo "Installing Yarn"
+curl -o- -L https://yarnpkg.com/install.sh | bash
 
 #echo "installing a few global npm packages"
 #npm install --global semantic-release-cli
