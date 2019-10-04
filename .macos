@@ -36,7 +36,7 @@ echo "brew installing stuff"
 # imagemagick: eventually I will need this for something
 # jq: command line JSON processor
 # tree: really handy for listing out directories in text
-brew install awscli git git-lfs gnupg imagemagick jq openssl sentry-cli tree watchmen
+brew install awscli git git-lfs gnupg imagemagick jq openssl tree watchmen
 # yarn: without node because we'll get it from installing n later - no longer works, doesn't accept without-node argument.
 # brew install yarn --without-node
 
