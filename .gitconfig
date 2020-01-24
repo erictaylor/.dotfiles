@@ -3,6 +3,8 @@
 	email = eric@daxos.com
 [includeIf "gitdir:~/Smartcare/"]
 	path = ~/Smartcare/.gitconfig
+[includeIf "gitdir:~/code/"]
+  path = ~/code/.gitconfig
 [mergetool]
 	keepBackup = true
 [core]
