@@ -64,9 +64,8 @@ brew tap homebrew/cask-versions
 
 echo "Installing apps with brew cask"
 brew cask install google-chrome firefox firefox-developer-edition brave-browser \
-visual-studio-code 1password hyper insomnia slack notion figma docker framer-x \
-virtualbox spotify vlc discord suspicious-package \
-qlcolorcode qlmarkdown qlstephen quicklook-json
+visual-studio-code 1password iterm2 insomnia slack monitorcontrol figma docker \
+framer-x spotify vlc discord
 
 # Fonts
 echo "Installing fonts"
