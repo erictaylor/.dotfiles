@@ -1,10 +1,7 @@
 [user]
 	name = Eric Taylor
 	email = eric@daxos.com
-[includeIf "gitdir:~/Smartcare/"]
-	path = ~/Smartcare/.gitconfig
-[includeIf "gitdir:~/code/"]
-  path = ~/code/.gitconfig
+	signingkey = 5287F4ABA1014AC3099FB6F4E0735B432E0F725C
 [mergetool]
 	keepBackup = true
 [core]
@@ -60,3 +57,17 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[pull]
+	rebase = false
+[commit]
+	gpgsign = false
+[gpg]
+	program = /usr/local/bin/gpg
+[includeIf "gitdir:~/Smartcare/"]
+	path = ~/Smartcare/.gitconfig
+[includeIf "gitdir:~/code/"]
+  path = ~/code/.gitconfig
+[includeIf "gitdir:~/Contra/"]
+  path = ~/Contra/.gitconfig
+[init]
+	defaultBranch = main

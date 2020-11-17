@@ -81,7 +81,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git heroku nvm vscode)
+plugins=(git docker docker-compose heroku vscode autoenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,12 +118,6 @@ alias reload!="source ~/.zshrc"
 # Git sign GPG
 export GPG_TTY=$(tty)
 
-# NVM
-export NVM_DIR="/Users/erictaylor/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Added by n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  
 
@@ -137,3 +131,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
+
+# Rust, added manaully
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Starship
+eval "$(starship init zsh)"
