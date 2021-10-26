@@ -42,8 +42,8 @@
   r = resetr1 = reset HEAD^r2 = reset HEAD^^rh = reset --hardrh1 = reset HEAD^ --hardrh2 = reset HEAD^^ --hard
 	d = difftool
 	vimdiff = difftool -y -t vimdiff -R
-[diff]
-	tool = vimdiff
+# [diff]
+# 	tool = vimdiff
 [difftool]
 	prompt = false
 [push]
@@ -71,3 +71,15 @@
   path = ~/Contra/.gitconfig
 [init]
 	defaultBranch = main
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  line-numbers = true
+  side-by-side = true
+  navigate = true
+  syntax-theme = Monokai Extended
+[interactive]
+  diffFilter = delta --color-only

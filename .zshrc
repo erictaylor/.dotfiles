@@ -77,6 +77,17 @@ then
   source ~/.localrc
 fi
 
+# Homebrew Autocompletions
+# https://docs.brew.sh/Shell-Completion
+# Must be ran before sourcing oh-my-zsh
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -118,16 +129,13 @@ alias reload!="source ~/.zshrc"
 # Git sign GPG
 export GPG_TTY=$(tty)
 
-# Added by n-install (see http://git.io/n-install-repo).
-export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  
-
 # Paths
 
 # .dotfiles bins
 export PATH="$PATH:$HOME/.my_bin"
 
-# Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# SBIN
+export PATH="/usr/local/sbin:$PATH"
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
@@ -135,5 +143,10 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # Rust, added manaully
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Added by n-install (see http://git.io/n-install-repo).
+export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
 # Starship
 eval "$(starship init zsh)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
