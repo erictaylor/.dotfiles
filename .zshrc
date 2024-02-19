@@ -72,10 +72,10 @@ prompt_context(){}
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
+# if [[ -a ~/.localrc ]]
+# then
+#   source ~/.localrc
+# fi
 
 # Homebrew Autocompletions
 # https://docs.brew.sh/Shell-Completion
@@ -92,7 +92,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose heroku vscode autoenv)
+plugins=(git docker docker-compose heroku vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,6 +126,12 @@ alias zshconfig="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
 alias reload!="source ~/.zshrc"
 
+# direnv
+eval "$(direnv hook zsh)"
+
+# Starship
+eval "$(starship init zsh)"
+
 # Git sign GPG
 export GPG_TTY=$(tty)
 
@@ -146,7 +152,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Added by n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
-# Starship
-eval "$(starship init zsh)"
-
+# Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

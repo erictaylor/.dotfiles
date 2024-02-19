@@ -49,7 +49,8 @@
 [push]
 	default = matching
 [credential]
-	helper = cache
+	# helper = cache
+  helper = osxkeychain
 [merge]
 	# ff = false
 [filter "lfs"]
@@ -62,7 +63,7 @@
 [commit]
 	gpgsign = false
 [gpg]
-	program = /usr/local/bin/gpg
+	program = /opt/homebrew/bin/gpg
 [includeIf "gitdir:~/Smartcare/"]
 	path = ~/Smartcare/.gitconfig
 [includeIf "gitdir:~/code/"]
@@ -83,3 +84,6 @@
   syntax-theme = Monokai Extended
 [interactive]
   diffFilter = delta --color-only
+[diff "lockb"]
+	textconv = bun
+	binary = true

@@ -2,7 +2,6 @@ set nocompatible
 filetype off
 syntax on
 
-set rtp+=/usr/local/go/misc/vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
