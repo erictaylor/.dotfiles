@@ -68,8 +68,8 @@
 	path = ~/Smartcare/.gitconfig
 [includeIf "gitdir:~/code/"]
   path = ~/code/.gitconfig
-[includeIf "gitdir:~/Contra/"]
-  path = ~/Contra/.gitconfig
+[includeIf "gitdir:~/avalabs/"]
+  path = ~/avalabs/.gitconfig
 [init]
 	defaultBranch = main
 [pager]
